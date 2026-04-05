@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>亮亮 · 營養師與AI探索者 | 首頁介紹</title>
+    <style>
+        /* ---------- RESET & 全域變數 (低飽和中性色調) ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-main: #F5F3EF;        /* 暖灰米白基底 */
+            --card-bg: #FFFFFF;
+            --text-primary: #2C2A29;
+            --text-secondary: #5F5B57;
+            --text-soft: #7E7A75;
+            --accent-light: #D9D2C5;   /* 中性柔和邊框／點綴 */
+            --accent-soft: #B7AD9F;
+            --tag-bg: #EFEBE5;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.01);
+            --radius-card: 28px;
+            --radius-tag: 40px;
+            --transition: all 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Noto Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            /* 動態字體基礎尺寸：讓螢幕舒適 (clamp 確保小螢幕不小、大螢幕優雅) */
+            font-size: clamp(1rem, 1.8vw, 1.125rem);
+        }
+
+        /* 整體容器 - 置中且有呼吸感 */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* 所有區塊間距 */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        /* 標題風格 */
+        .section-title {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            border-left: 4px solid var(--accent-soft);
+            padding-left: 1.2rem;
+        }
+
+        /* Hero 區塊 */
+        .hero {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            margin-bottom: 2rem;
+        }
+        .hero-name {
+            font-size: clamp(2.2rem, 7vw, 3.8rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #3C3A37 0%, #6C655C 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.75rem;
+        }
+        .hero-tagline {
+            font-size: clamp(1rem, 2.8vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto;
+            font-weight: 400;
+            border-top: 1px solid var(--accent-light);
+            display: inline-block;
+            padding-top: 1rem;
+        }
+        .hero-divider {
+            width: 70px;
+            height: 2px;
+            background: var(--accent-soft);
+            margin: 1.5rem auto 0;
+            opacity: 0.5;
+        }
+
+        /* 卡片通用設計 */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+        .card:hover {
+            box-shadow: 0 20px 32px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.01);
+        }
+
+        /* 關於我區域：標籤容器 */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .intro-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        .tag {
+            background: var(--tag-bg);
+            color: var(--text-primary);
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-tag);
+            font-size: 0.85rem;
+            font-weight: 470;
+            letter-spacing: 0.3px;
+            transition: var(--transition);
+            backdrop-filter: blur(2px);
+        }
+        .tag:hover {
+            background: #E3DDD4;
+            transform: translateY(-1px);
+        }
+
+        /* 專業與興趣區塊 - 兩欄響應式 */
+        .skills-interests-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 2rem;
+        }
+        @media (max-width: 780px) {
+            .skills-interests-grid {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+            .container {
+                padding: 1.5rem 1.2rem 3rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* 硬技能項目 */
+        .skill-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .skill-item {
+            border-bottom: 1px solid var(--accent-light);
+            padding-bottom: 1rem;
+        }
+        .skill-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .skill-name {
+            font-weight: 650;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .skill-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+        /* 興趣項目 (三塊) */
+        .hobby-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+        .hobby-item {
+            background: #FCFAF7;
+            border-radius: 24px;
+            padding: 0.2rem 0 0.2rem 0;
+        }
+        .hobby-title {
+            font-weight: 620;
+            font-size: 1.08rem;
+            margin-bottom: 0.5rem;
+            color: #4D453C;
+            display: inline-block;
+            background: #EFEBE5;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+        }
+        .hobby-desc {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin-top: 0.7rem;
+            padding-left: 0.2rem;
+        }
+
+        /* 聯絡區塊 + 視覺色彩說明 */
+        .contact-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .contact-info {
+            flex: 2;
+        }
+        .email-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--tag-bg);
+            padding: 0.8rem 1.6rem;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        .email-link:hover {
+            background: #E2DAD1;
+            border-color: var(--accent-soft);
+            transform: scale(0.98);
+        }
+        .color-palette {
+            flex: 1;
+            background: #FEFCF9;
+            border-radius: 36px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--accent-light);
+        }
+        .color-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            color: var(--text-soft);
+            margin-bottom: 0.8rem;
+        }
+        .swatches {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 60px;
+            background: #D9D2C5;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .swatch:nth-child(1) { background: #F5F3EF; border: 1px solid #DDD6CE; }
+        .swatch:nth-child(2) { background: #EFEBE5; }
+        .swatch:nth-child(3) { background: #B7AD9F; }
+        .swatch:nth-child(4) { background: #5F5B57; }
+        .palette-text {
+            font-size: 0.75rem;
+            color: var(--text-soft);
+            margin-top: 0.8rem;
+            line-height: 1.4;
+        }
+        hr {
+            margin: 1.5rem 0 0.5rem;
+            border: none;
+            height: 1px;
+            background: var(--accent-light);
+            opacity: 0.5;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-soft);
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--accent-light);
+        }
+
+        /* 小調整讓按鈕與整體更協調 */
+        @media (max-width: 550px) {
+            .contact-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .email-link {
+                justify-content: center;
+            }
+            .hero {
+                padding: 1.5rem 0 1rem;
+            }
+        }
+        /* 自適應字體加強 (body 基礎字體已經 clamp, 內部元素相對 rem 即可) */
+        h1, h2, h3, .hero-name, .section-title {
+            line-height: 1.2;
+        }
+        a, button {
+            cursor: pointer;
+        }
+        .highlight-icon {
+            font-size: 1.1em;
+            opacity: 0.75;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Hero 標題區塊 -->
+    <section class="hero">
+        <h1 class="hero-name">營養師亮亮的AI作品探索天地</h1>
+        <div class="hero-tagline">
+            兼具醫理邏輯與人文美感，探索健康科學、結構之美與生活哲學的 INTJ 策畫者。
+        </div>
+        <div class="hero-divider"></div>
+    </section>
+
+    <!-- 關於我 About Me -->
+    <section>
+        <h2 class="section-title">關於我</h2>
+        <div class="card">
+            <div class="about-content">
+                <div class="intro-text">
+                    我是亮亮，一位將臨床營養邏輯與人工智能熱情交織的 INTJ 思考者。<br>
+                    在理性數據與感性筆墨之間，追求結構的優雅與本質的澄澈。
+                </div>
+                <div class="tag-list">
+                    <span class="tag">🥗 營養師</span>
+                    <span class="tag">🤖 AI研究員</span>
+                    <span class="tag">🎵 音樂愛好者</span>
+                    <span class="tag">🔫 生存遊戲玩家</span>
+                    <span class="tag">✒️ 鋼筆書法業餘家</span>
+                    <span class="tag">📋 公僕人員</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 專業與興趣展示 (Skills & Interests) -->
+    <section>
+        <h2 class="section-title">專業與興趣</h2>
+        <div class="skills-interests-grid">
+            <!-- 左：硬技能 -->
+            <div class="card">
+                <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.5rem;">📘</span>
+                    <h3 style="font-weight: 600; font-size: 1.3rem;">專業技能</h3>
+                </div>
+                <div class="skill-items">
+                    <div class="skill-item">
+                        <div class="skill-name">臨床營養知識</div>
+                        <div class="skill-desc">實證醫學導向之營養照護、疾病營養調理與個案追蹤，協助改善健康預後。</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">團膳與食品衛生管理</div>
+                        <div class="skill-desc">HACCP 系統規劃、大量膳食供應監控，確保食品安全與品質流程。</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">食品營養法規研析</div>
+                        <div class="skill-desc">國內外營養標示、健康宣稱法規解讀，政策合規與風險評估。</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">🤖 AI 研究與數據分析</div>
+                        <div class="skill-desc">機器學習輔助營養數據探勘，大型語言模型應用，打造智慧健康工具。</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右：生活興趣 (硬筆書法/手繪/音樂) -->
+            <div class="card">
+                <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.5rem;">🎨</span>
+                    <h3 style="font-weight: 600; font-size: 1.3rem;">生活興趣</h3>
+                </div>
+                <div class="hobby-list">
+                    <!-- 硬筆書法 -->
+                    <div class="hobby-item">
+                        <div class="hobby-title">✒️ 硬筆書法</div>
+                        <div class="hobby-desc">
+                            專注於經典帖學的臨摹，透過鋼筆與墨水的流動，在方寸之間實踐結構的嚴謹與運筆的韻律。
+                        </div>
+                    </div>
+                    <!-- 手繪速寫 -->
+                    <div class="hobby-item">
+                        <div class="hobby-title">✏️ 手繪速寫</div>
+                        <div class="hobby-desc">
+                            以線條捕捉日常觀察，記錄生活中的瞬間與空間感。
+                        </div>
+                    </div>
+                    <!-- 音樂與器樂 -->
+                    <div class="hobby-item">
+                        <div class="hobby-title">🎶 音樂與器樂</div>
+                        <div class="hobby-desc">
+                            在音符與旋律中尋找理性的頻率與感性的共鳴。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 視覺與聯絡資訊 Visuals & Contact -->
+    <section>
+        <h2 class="section-title">視覺與聯絡</h2>
+        <div class="contact-section">
+            <div class="contact-info card" style="padding: 1.6rem 2rem;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                    <span style="font-size: 1.6rem;">📬</span>
+                    <span style="font-weight: 500;">聯絡管道</span>
+                </div>
+                <a href="mailto:s8762999999@gmail.com" class="email-link">
+                    📧 s8762999999@gmail.com
+                    <span style="font-size: 0.9rem;">→</span>
+                </a>
+                <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-soft);">
+                    歡迎交流營養科學、AI 應用，或分享生活美學。
+                </div>
+            </div>
+
+            <div class="color-palette">
+                <div class="color-title">🎨 色彩傾向 · 低飽和中性色調</div>
+                <div class="swatches">
+                    <div class="swatch"></div>
+                    <div class="swatch"></div>
+                    <div class="swatch"></div>
+                    <div class="swatch"></div>
+                </div>
+                <div class="palette-text">
+                    米白基底｜暖灰層次｜柔和沙色<br>
+                    營造清晰、乾淨且富有溫度的視覺氛圍，讓焦點回歸內容。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 微小頁腳：呼應理性與美學 -->
+    <div class="footer-note">
+        ｜ 理性策劃 · 清晰結構 ｜ 自動適配螢幕，舒適閱讀 ｜ © 亮亮 · AI 探索筆記 ｜
+    </div>
+</div>
+</body>
+</html>
