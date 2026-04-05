@@ -217,74 +217,39 @@
             padding-left: 0.2rem;
         }
 
-        /* 聯絡區塊 + 視覺色彩說明 */
+        /* 聯絡區塊 (移除色彩模塊後，單一卡片優化) */
         .contact-section {
             display: flex;
-            flex-wrap: wrap;
             gap: 2rem;
-            justify-content: space-between;
-            align-items: center;
         }
         .contact-info {
-            flex: 2;
+            flex: 1;
+            width: 100%;
         }
-        .email-link {
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0 0.8rem;
+        }
+        .contact-link {
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
             background: var(--tag-bg);
-            padding: 0.8rem 1.6rem;
+            padding: 0.7rem 1.4rem;
             border-radius: 60px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             color: var(--text-primary);
             text-decoration: none;
             transition: var(--transition);
             border: 1px solid transparent;
         }
-        .email-link:hover {
+        .contact-link:hover {
             background: #E2DAD1;
             border-color: var(--accent-soft);
             transform: scale(0.98);
-        }
-        .color-palette {
-            flex: 1;
-            background: #FEFCF9;
-            border-radius: 36px;
-            padding: 1.2rem 1.5rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--accent-light);
-        }
-        .color-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-            color: var(--text-soft);
-            margin-bottom: 0.8rem;
-        }
-        .swatches {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .swatch {
-            width: 40px;
-            height: 40px;
-            border-radius: 60px;
-            background: #D9D2C5;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.05);
-        }
-        .swatch:nth-child(1) { background: #F5F3EF; border: 1px solid #DDD6CE; }
-        .swatch:nth-child(2) { background: #EFEBE5; }
-        .swatch:nth-child(3) { background: #B7AD9F; }
-        .swatch:nth-child(4) { background: #5F5B57; }
-        .palette-text {
-            font-size: 0.75rem;
-            color: var(--text-soft);
-            margin-top: 0.8rem;
-            line-height: 1.4;
         }
         hr {
             margin: 1.5rem 0 0.5rem;
@@ -308,7 +273,11 @@
                 flex-direction: column;
                 align-items: stretch;
             }
-            .email-link {
+            .contact-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .contact-link {
                 justify-content: center;
             }
             .hero {
@@ -423,35 +392,27 @@
         </div>
     </section>
 
-    <!-- 視覺與聯絡資訊 Visuals & Contact -->
+    <!-- 視覺與聯絡資訊 (色彩傾向區塊已移除，新增 IG 連結) -->
     <section>
         <h2 class="section-title">視覺與聯絡</h2>
         <div class="contact-section">
             <div class="contact-info card" style="padding: 1.6rem 2rem;">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem;">
                     <span style="font-size: 1.6rem;">📬</span>
                     <span style="font-weight: 500;">聯絡管道</span>
                 </div>
-                <a href="mailto:s8762999999@gmail.com" class="email-link">
-                    📧 s8762999999@gmail.com
-                    <span style="font-size: 0.9rem;">→</span>
-                </a>
-                <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-soft);">
+                <div class="contact-links">
+                    <!-- 電子郵件 -->
+                    <a href="mailto:s8762999999@gmail.com" class="contact-link">
+                        📧 s8762999999@gmail.com
+                    </a>
+                    <!-- Instagram 連結 (新視窗開啟) -->
+                    <a href="https://www.instagram.com/son_win_lee?igsh=MWZuaG85d2drcnJjMg%3D%3D&utm_source=qr" class="contact-link" target="_blank" rel="noopener noreferrer">
+                        📷 Instagram @son_win_lee
+                    </a>
+                </div>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-soft);">
                     歡迎交流營養科學、AI 應用，或分享生活美學。
-                </div>
-            </div>
-
-            <div class="color-palette">
-                <div class="color-title">🎨 色彩傾向 · 低飽和中性色調</div>
-                <div class="swatches">
-                    <div class="swatch"></div>
-                    <div class="swatch"></div>
-                    <div class="swatch"></div>
-                    <div class="swatch"></div>
-                </div>
-                <div class="palette-text">
-                    米白基底｜暖灰層次｜柔和沙色<br>
-                    營造清晰、乾淨且富有溫度的視覺氛圍，讓焦點回歸內容。
                 </div>
             </div>
         </div>
